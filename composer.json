@@ -11,7 +11,7 @@
   ],
   "require": {
     "yiisoft/yii2": "^2.0",
-    "carono/commerceml": "*"
+    "carono/commerceml": "dev-master"
   },
   "autoload": {
     "psr-4": {
@@ -28,6 +28,10 @@
     {
       "type": "composer",
       "url": "https://asset-packagist.org"
+    },
+    {
+      "type": "vcs",
+      "url": "https://github.com/div-production/php-commerceml.git"
     }
   ]  
 }

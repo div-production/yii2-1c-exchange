@@ -168,6 +168,12 @@ class ApiController extends Controller
         if ($groupClass = $this->getGroupClass()) {
             $groupClass::createTree1c($commerce->classifier->getGroups());
         }
+
+        if ($offerClass = $this->getOfferClass()) {
+            $priceTypes = $commerce->classifier->getPriceTypes();
+            $offerClass::createPriceTypes1c($priceTypes);
+        }
+
         $productClass = $this->getProductClass();
         $productClass::createProperties1c($commerce->classifier->getProperties());
         foreach ($commerce->catalog->getProducts() as $product) {
@@ -246,7 +252,7 @@ class ApiController extends Controller
         }
         $file = $this->module->getTmpDir() . DIRECTORY_SEPARATOR . $filename;
         if ($type == 'catalog') {
-            if (strpos($file, 'offer') !== false) {
+            if (strpos($file, 'offer') !== false || strpos($file, 'prices') !== false || strpos($file, 'rests') !== false) {
                 $this->parsingOffer($file);
             } elseif (strpos($file, 'import') !== false) {
                 $this->parsingImport($file);
