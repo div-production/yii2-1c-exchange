@@ -268,7 +268,18 @@ class ApiController extends Controller
 
     protected function clearTmp()
     {
-        FileHelper::removeDirectory($this->module->getTmpDir());
+        $tmpDir = $this->module->getTmpDir();
+        $files = scandir($tmpDir);
+
+        foreach ($files as $file) {
+            if ($file == '.' || $file == '..') {
+                continue;
+            }
+
+            if (preg_match('/\.(zip|xml)$/', $file)) {
+                unlink($tmpDir . DIRECTORY_SEPARATOR . $file);
+            }
+        }
     }
 
     /**
